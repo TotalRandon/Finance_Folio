@@ -2,10 +2,10 @@
 
 Em resumo o Finance Folio será um software web para os investidores onde criaram seus portifólios pessoais sobre suas transações durante suas operações no mercado financeiro, tudo isso manualmente e mantendo a visualização de seus ativos em um único lugar. O projeto Finance Folio terá os seguintes benefícios: 
 
--> Introduzir seus ativos todos no mesmo ambiente 
--> Opções variadas de ativos como bolsa de valores, criptomedas, fundos imobliarios ...
--> Opções de registro de compra, venda, data, tipo e valor
--> Disponível página de gráficos para price action (futuro)
+- Introduzir seus ativos todos no mesmo ambiente 
+- Opções variadas de ativos como bolsa de valores, criptomedas, fundos imobliarios ...
+- Opções de registro de compra, venda, data, tipo e valor
+- Disponível página de gráficos para price action (futuro)
 
 Ainda estamos em desenvolvimento e logo log entrará em vigor em breve ... 
 Esse é meu projeto para TCC ...
