@@ -1,42 +1,60 @@
-import requests 
+import requests
 
-from binance.client import Client 
+# Defina as URLs da API da Binance para o pares de negociação
+btc_usd_url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT'
+btc_brl_url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCBRL'
 
-# Substitua pelos seus próprios valores da API
-api_key = 'MaQ9cRs4otjKtUZjMcR6jqu79xNj7JKEb6nf0Mg9PjJZKz6a4cG8diWfoae2EDcJ'
-api_secret = '4fTWvBjDlirb0cUO4xqS6sE3sOpr1JqDoBPTBOs4c57fsjfUg5W4rnNX9vztYjxR'
+eth_usd_url = 'https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT'
+eth_brl_url = 'https://api.binance.com/api/v3/ticker/price?symbol=ETHBRL'
 
-## Criação da instância do cliente
-client = Client(api_key, api_secret)
+ada_usd_url = 'https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT'
+ada_brl_url = 'https://api.binance.com/api/v3/ticker/price?symbol=ADABRL'
 
-# Obtendo o preço atual das criptomoedas em relação ao dólar (USDT)
-symbol_btc = 'BTCUSDT'
-ticker_btc = client.get_symbol_ticker(symbol=symbol_btc)
+# Função para obter o preço de um determinado par de negociação
+def get_price(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        price = float(data['price'])
+        return round(price, 2)
+    else:
+        return None
 
-symbol_eth = 'ETHUSDT'
-ticker_eth = client.get_symbol_ticker(symbol=symbol_eth)
-
-symbol_ada = 'ADAUSDT'
-ticker_ada = client.get_symbol_ticker(symbol=symbol_ada)
-
-# Verificando se a resposta da API foi bem-sucedida 
-if 'price' in ticker_btc:
-    btc_price = float(ticker_btc['price'])
-    btc_price_rounded = round(btc_price, 2)
-    print(f"Preço do Bitcoin (BTC): {btc_price_rounded}")
+# Obtenha o preço do Bitcoin em USDT e BRL
+btc_price = get_price(btc_usd_url)
+if btc_price is not None:
+    print(f"Preço do Bitcoin (BTC):", btc_price, "US$")
 else:
-    print("Erro ao obter o preço do Bitcoin")
+    print('Falha ao obter o preço do Bitcoin em dolar')
     
-if 'price' in ticker_eth:
-    eth_price = float(ticker_eth['price'])
-    eth_price_rounded = round(eth_price, 2)
-    print(f"Preço do Etherium (ETH): {eth_price_rounded}")
+btc_price = get_price(btc_brl_url)
+if btc_price is not None:
+    print(f"Preço do Bitcoin (BTC):", btc_price, "R$ \n")
 else:
-    print("Erro ao obter o preço do Etherium")
+    print('Falha ao obter o preço do Bitcoin em reais \n')
+
+# Obtenha o preço do Ethereum em USDT e BRL
+eth_price = get_price(eth_usd_url)
+if eth_price is not None:
+    print(f"Preço do Etherium (ETH):", eth_price, "US$")
+else:
+    print('Falha ao obter o preço do Ethereum em dolar')
     
-if 'price' in ticker_ada:
-    ada_price = float(ticker_ada['price'])
-    ada_price_rounded = round(ada_price, 2)
-    print(f"Preço da Cardano (ETH): {ada_price_rounded}")
+eth_price = get_price(eth_brl_url)
+if eth_price is not None:
+    print(f"Preço do Etherium (ETH):", eth_price, "R$ \n")
 else:
-    print("Erro ao obter o preço da Cardano")
+    print('Falha ao obter o preço do Ethereum em reais \n')
+    
+# Obtenha o preço da Cardano em USDT e BRL
+ada_price = get_price(ada_usd_url)
+if ada_price is not None:
+    print(f"Preço da Cardano (ADA):", ada_price, "US$")
+else:
+    print('Falha ao obter o preço da Cardano em dolar')
+    
+ada_price = get_price(ada_brl_url)
+if ada_price is not None:
+    print(f"Preço da Cardano (ADA):", ada_price, "R$ \n")
+else:
+    print('Falha ao obter o preço da Cardano em reais \n')
